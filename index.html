@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="./assets/css/reset.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Tournament of Power</title>
+</head>
+<body>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>Tournament of Power</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h2 id="marquee"></h2>
+            <br>
+            <h3>Your Health <span id="player-health"> </span></h3>
+            <br>
+            <h3>Opponent's Health <span id="opponent-health"> </span></h3>
+            <br>
+            <button id="melee-button" onclick="meleeAttack()">Melee Attack</button>
+            <br><br>
+            <button id="energy-button" onclick="energyAttack()">Energy Attack</button>
+            <br><br>
+            <button id="restart-button" hidden="true" onclick="restartGame()">Restart Game</button>
+            <br>
+        </div>
+    </div>
+</div>
+        
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script rel="javascript" src="./assets/javascript/game.js"></script>
+</body>
+</html>
