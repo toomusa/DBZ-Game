@@ -15,29 +15,121 @@
 
 
 <div class="container">
+    <!-- header row -->
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-12" id="heading">
             <h1>Tournament of Power</h1>
+            <h4>Who is the most powerful warrior in the universe? Let's find out!</h4>
         </div>
     </div>
+    <!-- character select row -->
     <div class="row">
-        <div class="col-sm-12">
-            <h2 id="marquee"></h2>
-            <br>
-            <h3>Your Health <span id="player-health"> </span></h3>
-            <br>
-            <h3>Opponent's Health <span id="opponent-health"> </span></h3>
-            <br>
-            <button id="melee-button" onclick="meleeAttack()">Melee Attack</button>
-            <br><br>
-            <button id="energy-button" onclick="energyAttack()">Energy Attack</button>
-            <br><br>
-            <button id="restart-button" hidden="true" onclick="restartGame()">Restart Game</button>
-            <br>
+        <div class="col-sm-12" id="select-fighter">
+            <h3>Choose Your Fighter</h3>
+            <div class="row">
+                <div class="col-sm-1" id="select-box">
+                <!-- spacer column -->
+                </div>
+                <div class="col-sm-2" id="select-box">
+                    <img src="./assets/images/beerus1.png" class="char" id="beerus" height="210px">
+                    <p class="label">Beerus</p>
+                </div>
+                <div class="col-sm-2" id="select-box">
+                    <img src="./assets/images/goku1.png" class="char" id="goku" height="230px">
+                    <p class="label">Goku</p>
+                </div>
+                <div class="col-sm-2" id="select-box">
+                    <img src="./assets/images/frieza1.png" class="char" id="frieza" height="210px"> 
+                    <p class="label">Frieza</p>
+                </div>
+                <div class="col-sm-2" id="select-box">
+                    <img src="./assets/images/vegeta1.png" class="char" id="vegeta" height="220px">
+                    <p class="label">Vegeta</p>
+                </div>
+                <div class="col-sm-2" id="select-box">
+                    <img src="./assets/images/jiren1.png" class="char" id="jiren" height="200px">
+                    <p class="label">Jiren</p>
+                </div>
+                <div class="col-sm-1" id="select-box">
+                <!-- spacer column -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- game play row -->
+    <div class="row">
+        <!-- player fighter area -->
+        <div class="col-sm-4" id="player-fighter">
+            <div class="card" style="width: 100%;" id="fighter-card">
+                <img class="card-img-top char" src="./assets/images/jiren2.png" id="player-active">
+                <div class="card-body">
+                    <h6>Fighter Stats</h6>
+                    <p class="card-text" id="player-stats"> 
+                        Health: <span id="p-health"></span><br>
+                        Melee Attack: <span id="p-melee"></span><br>
+                        Energy Attack: <span id="p-energy"></span><br>
+                        Counter: <span id="p-counter"></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- game minutes and buttons -->
+        <div class="col-sm-4" id="game-progress">
+            <div class="row">
+                <div class="col-sm-12 text-light" id="fighter-health">
+                    <!-- fighter health area -->
+                    <br>
+                    <h5>Your Health: <span id="player-health"> </span></h5> 
+                    <br>
+                    <h5>Opponent's Health: <span id="opponent-health"> </span></h5>
+                    <br>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12" id="marquee">
+                    <!-- scroll text box -->
+                    <div id="marquee-box">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut corporis nostrum perferendis dolores, nihil tenetur omnis eum sint magni nam eaque quibusdam fugiat architecto possimus explicabo blanditiis ab a! Minima architecto possimus explicabo blanditiis ab a! Minima..
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut corporis nostrum perferendis dolores, nihil tenetur omnis eum sint magni nam eaque quibusdam fugiat architecto possimus explicabo blanditiis ab a! Minima architecto possimus explicabo blanditiis ab a! Minima..
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12" id="action-buttons">
+                    <!-- buttons -->
+                    <br>
+                    <button id="melee-button" onclick="meleeAttack()">Melee Attack</button>
+                    <br><br>
+                    <button id="energy-button" onclick="energyAttack()">Energy Attack</button>
+                    <br><br>
+                    <button id="restart-button" hidden="true" onclick="restartGame()">Restart Game</button>
+                    <br><br>
+                </div>
+            </div>
+        </div>
+        <!-- opponent fighter area -->
+        <div class="col-sm-4" id="opponent-fighter">
+            <div class="card" style="width: 100%;" id="fighter-card">
+                <img class="card-img-top char" src="./assets/images/frieza2.png" id="opponent-active">
+                <div class="card-body">
+                    <h6>Fighter Stats</h6>
+                    <p class="card-text" id="opponent-stats"> 
+                        Health: <span id="o-health"></span><br>
+                        Melee Attack: <span id="o-melee"></span><br>
+                        Energy Attack: <span id="o-energy"></span><br>
+                        Counter: <span id="o-counter"></span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- death row -->
+    <div class="row">
+        <div class="col-sm-12" id="death-row">
+            <h3>Defeated</h3>
         </div>
     </div>
 </div>
-        
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

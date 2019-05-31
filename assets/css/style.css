@@ -1,0 +1,130 @@
+h1, h2, h3, h4, h5, h6 {
+    text-align: center;
+    align-content: center;
+}
+
+h4 {
+    font-style: italic;
+}
+
+#heading {
+    background-color: aqua;
+}
+      
+#select-fighter {
+    background-color: beige;
+}
+
+#player-fighter {
+    background-color: green;
+}
+
+#game-progress {
+    background-color: yellow;
+}
+
+#fighter-health {
+    background-color: purple;
+}
+
+#player-health {
+
+}
+
+#opponent-health {
+
+}
+
+#marquee {
+    background-color: orange;
+}
+
+#action-buttons {
+    background-color: navy;
+    text-align: center;
+}
+
+#melee-button {
+
+}
+
+#energy-button {
+
+}
+
+#restart-button {
+
+}
+
+#opponent-fighter {
+    background-color: coral;
+}
+
+#death-row {
+    background-color: darkgray;
+}
+    
+#goku, #vegeta, #frieza, #jiren, #beerus {
+    margin: 0 auto;
+}
+
+.char {
+
+}
+
+#select-box {
+    text-align: center;
+}
+
+#player-stats {
+
+}
+
+#fighter-card {
+    text-align: center;
+    background: none;
+    border: none;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#player-active {
+    text-align: center;
+    height: 400px;
+    width: auto;
+    margin: 0 auto;
+}
+
+#player-stats {
+
+}
+
+#opponent-active {
+    text-align: center;
+    height: 400px;
+    width: auto;
+    margin: 0 auto;
+}
+
+#opponent-stats {
+
+}
+
+#marquee-box {
+    height:200px;
+    max-height: 200px;
+    min-height: 200px;
+    overflow-y: auto;
+    
+}
+
+/* #marquee-box::-webkit-scrollbar {
+    width: 30px;
+    color: brown;
+} */
+
+.label {
+    text-emphasis: bold;
+    text-align: center;
+    font-size: 18px;
+}
