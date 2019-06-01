@@ -210,10 +210,67 @@ printToScreen();
 
     // miss an attack if random attack power is less than 20
 
+    // function playerPick() {
+    //     $(this).hasClass("char")
+    // }
+
+    // function opponentPick() {
+    //     $(this).hasClass("char")
+    // }
+    
+    var playerPick = false;
+    var opponentPick = false;
+
+    function charSwap() {
+        if ($("#goku").hasClass("active")) {
+            $("#goku").attr("src", "./assets/images/goku2.png");
+        };
+        if ($("#vegeta").hasClass("active")) {
+            $("#vegeta").attr("src", "./assets/images/vegeta2.png")
+        };
+        if ($("#frieza").hasClass("active")) {
+            $("#frieza").attr("src", "./assets/images/frieza2.png")
+        };
+        if ($("#beerus").hasClass("active")) {
+            $("#beerus").attr("src", "./assets/images/beerus2.png")
+        };
+        if ($("#jiren").hasClass("active")) {
+            $("#jiren").attr("src", "./assets/images/jiren2.png")
+        };
+    }
+
+
+    $(".char").on("click", function charSelect() {
+        if (playerPick === false && opponentPick === false) {
+            $(this).removeClass("char").addClass("active");
+            charSwap();
+            $("#player-active").replaceWith($(this));
+            playerPick = true;
+            debugger;
+            $(this).attr("id") = document.querySelector("id")
+            activeFighter = 
+            $(this) = beerus;
+            player.health = beerus.health; // ???????????????
+            printToScreen();
+            console.log($(this));
+            // pick your fighter
+        }
+        else if (playerPick === true && opponentPick === false) {
+            $(this).removeClass("char").addClass("active");
+            charSwap();
+            $("#opponent-active").replaceWith($(this));
+            opponentPick = true;
+            // pick opponent fighter
+        }
+        else {
+            $(".char").disabled = true;
+            //can't click characters
+        }
+    })
 
     // on character click
     // if playerPick and enemyPick is false, pick a fighter
-    // character id removed to pick can't be repicked
+    // character id removed so pick can't be repicked
     // when dead, set enemyPick to false
     // assign a class to defeated enemy
     // to change image, use .html with img tags in quotes
