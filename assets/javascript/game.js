@@ -182,6 +182,10 @@ const nextFighter = () => {
     opponent.counter = 0;
     opponent.power.melee = 0;
     opponent.power.energy = 0;
+    oHealth.textContent = "";
+    oCounter.textContent = "";
+    oMelee.textContent = "";
+    oEnergy.textContent = "";
     opponentPick = false;
     activeOpponentName.textContent = "";
     $(".char").disabled = false;
@@ -377,6 +381,7 @@ printToScreen();
             oCounter.textContent = vegeta.counter;
             oMelee.textContent = vegeta.power.melee;
             oEnergy.textContent = vegeta.power.energy;
+            
         }
         if (opponentPickId == "Jiren") {
             oHealth.textContent = jiren.health;
