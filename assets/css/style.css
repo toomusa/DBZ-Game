@@ -99,6 +99,20 @@ h4 {
 
 }
 
+.active-player {
+    text-align: center;
+    height: 400px;
+    width: auto;
+    margin: 0 auto;
+}
+
+.active-enemy {
+    text-align: center;
+    height: 400px;
+    width: auto;
+    margin: 0 auto;
+}
+
 #opponent-active {
     text-align: center;
     height: 400px;
@@ -127,4 +141,27 @@ h4 {
     text-emphasis: bold;
     text-align: center;
     font-size: 18px;
+}
+
+.dead {
+    text-align: center;
+    height: 200px;
+    width: auto;
+    /* margin-left: 500px;
+    margin-right: 500px; */
+    transform: rotate(90deg);
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 90px;
+    padding-right: 90px;
+}
+
+#active-player-name {
+    font-size: 30px;
+    color: maroon;
+}
+
+#active-opponent-name {
+    font-size: 30px;
+    color: maroon;
 }
