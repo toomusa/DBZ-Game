@@ -90,22 +90,21 @@
             <div class="row">
                 <div class="col-sm-12" id="marquee">
                     <!-- scroll text box -->
-                    <div id="marquee-box">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut corporis nostrum perferendis dolores, nihil tenetur omnis eum sint magni nam eaque quibusdam fugiat architecto possimus explicabo blanditiis ab a! Minima architecto possimus explicabo blanditiis ab a! Minima..
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut corporis nostrum perferendis dolores, nihil tenetur omnis eum sint magni nam eaque quibusdam fugiat architecto possimus explicabo blanditiis ab a! Minima architecto possimus explicabo blanditiis ab a! Minima..
+                    <div id="marquee-box"> 
+                        <div>Pick your fighter</div>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-12" id="action-buttons">
                     <!-- buttons -->
-                    <br>
-                    <button id="melee-button" onclick="meleeAttack()">Melee Attack</button>
-                    <br><br>
-                    <button id="energy-button" onclick="energyAttack()">Energy Attack</button>
-                    <br><br>
-                    <button id="restart-button" onclick="restartGame()">Restart Game</button>
-                    <br><br>
+                    <!-- <img src="./assets/images/melee.png" id="b-melee" width="100px;"> -->
+                    <button id="melee-button" onclick="meleeAttack()"><img src="./assets/images/melee.png" id="b-melee" width="100px;"> Melee Attack</button>
+                    <!-- <br><br> -->
+                    <button id="energy-button" onclick="energyAttack()"><img src="./assets/images/energy.png" id="b-energy" width="120px;"> Energy Attack</button>
+                    <!-- <br><br> -->
+                    <button id="restart-button" onclick="restartGame()"><img src="./assets/images/sensu.png" id="b-restart" width="80px;"> Restart Game</button>
+                    <!-- <br><br> -->
                 </div>
             </div>
         </div>
@@ -129,7 +128,7 @@
     <!-- death row -->
     <div class="row">
         <div class="col-sm-12" id="death-row">
-            <h3>Defeated</h3>
+            <h3>Graveyard</h3>
         </div>
     </div>
 </div>

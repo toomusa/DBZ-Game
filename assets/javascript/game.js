@@ -1,6 +1,6 @@
 
 let player = {
-    health: 0,
+    health: [],
     counter: 0,
     power: {
         melee: 0,
@@ -9,7 +9,7 @@ let player = {
 }
 
 let opponent = {
-    health: 0,
+    health: "",
     counter: 0,
     power: {
         melee: 0,
@@ -73,25 +73,71 @@ oEnergy = document.getElementById("o-energy");
 activePlayerName = document.getElementById("active-player-name");
 activeOpponentName = document.getElementById("active-opponent-name");
 marquee = document.getElementById("marquee-box");
+let meleeButton = document.getElementById("melee-button");
+let energyButton = document.getElementById("energy-button");
+let restartButton = document.getElementById("restart-button");
+meleeButton.disabled = true;
+energyButton.disabled = true;
+let deathRow = [];
 
+$("#b-energy").on("click", function() {
+    if (energyButton.disabled === true) {
+        if (playerPick === false && opponentPick === false) {
+            $("#marquee-box").prepend("<div style='color: black'>You must first pick a fighter</div>");
+        } else if (playerPick === true && opponentPick === false) {
+            $("#marquee-box").prepend("<div style='color: black'>You must first pick an opponent</div>");
+        } else if (player.health === 0) {
+            meleeButton.disabled = true;
+            energyButton.disabled = true;
+        } else {
+        $("#marquee-box").prepend("<div style='color: black'>You must wait for attack to recharge</div>");
+        }
+    } 
+});
+
+$("#b-melee").on("click", function() {
+    if (meleeButton.disabled === true) {
+        if (playerPick === false && opponentPick === false) {
+            $("#marquee-box").prepend("<div style='color: black'>You must first pick a fighter</div>");
+        } else if (playerPick === true && opponentPick === false) {
+            $("#marquee-box").prepend("<div style='color: black'>You must first pick an opponent</div>");
+        } else if (player.health === 0) {
+            meleeButton.disabled = true;
+            energyButton.disabled = true;
+        } else {
+        $("#marquee-box").prepend("<div style='color: black'>You must wait for attack to recharge</div>");
+        } 
+    }
+});
+
+$(".dead").on("click", function() {
+    $("#marquee-box").prepend("<div style='color: black'>Fool he already dead</div>");
+});
 // executes melee attack, deals damange, receives counter damage
 // includes gameOver check and restartGame
 
 const meleeAttack = () => {
 
-    let meleeButton = document.getElementById("melee-button");
-    let marquee = document.getElementById("marquee");
-    let restartButton = document.getElementById("restart-button");
-
     let playerMeleeAttack = attackDamage(player.power.melee);
     opponent.health -= playerMeleeAttack;
+    $("#marquee-box").prepend("<div style='color: green'>You dealt " + playerMeleeAttack + " damage </div>");
+    
+    $("#b-melee").addClass("toggle");
+    setTimeout(function() {
+        $("#b-melee").removeClass("toggle");
+    }, 100);
+    
     meleeButton.disabled = true;
+
 
     if (gameOver(opponent.health)) {
         opponent.health = 0;
+        meleeButton.disabled = true;
+        energyButton.disabled = true;
+        $("#marquee-box").prepend("<div style='color: green'>You defeated " + opponentPickId + "!</div>");
         printToScreen();
         nextFighter();
-        // endGame("Player won the fight!");
+        // endGame("You won! You're the strongest fighter in the universe!");
         // return;
     }
 
@@ -100,17 +146,31 @@ const meleeAttack = () => {
 
     setTimeout( () => {
         let opponentCounterAttack = attackDamage(opponent.counter);
-        player.health -= opponentCounterAttack;
-        
+        if (opponent.health > 0) {
+            let opponentCounterAttack = attackDamage(opponent.counter);
+            player.health -= opponentCounterAttack;
+            $("#marquee-box").prepend("<div style='color: red'>" + opponentPickId + " countered with " + opponentCounterAttack + " damage </div>");
+            printToScreen();
+        }
+
         if (gameOver(player.health)) {
             player.health = 0;
+            meleeButton.disabled = true;
+            energyButton.disabled = true;
+            $("#marquee-box").prepend("<div style='color: red'>" + opponentPickId + " defeated you!</div>");
+            setTimeout(() => {
+                $("#marquee-box").prepend("<div style='color: black'>Click restart to play again</div>");
+            }, 400);
             printToScreen();
-            nextFighter();
             // endGame("Opponent won the fight!");
-            // return;
+            return;
         }
         
         meleeButton.disabled = false;
+        if (gameOver(opponent.health)) {
+            meleeButton.disabled = true;
+            energyButton.disabled = true;
+        }
         printToScreen();
         console.log("Opponent Counter Attack: " + opponentCounterAttack);
     }, 200)
@@ -121,37 +181,62 @@ const meleeAttack = () => {
 
 const energyAttack = () => {
 
-    let energyButton = document.getElementById("energy-button");
-    let marquee = document.getElementById("marquee");
-    let restartButton = document.getElementById("restart-button");
-
     let playerEnergyAttack = attackDamage(player.power.energy);
     opponent.health -= playerEnergyAttack;
+    $("#marquee-box").prepend("<div style='color: green'>You dealt " + playerEnergyAttack + " damage </div>");
+
+    $("#b-energy").addClass("toggle");
+    setTimeout(function() {
+        $("#b-energy").removeClass("toggle");
+    }, 100);
+
     energyButton.disabled = true;
     
     if (gameOver(opponent.health)) {
         opponent.health = 0;
+        meleeButton.disabled = true;
+        energyButton.disabled = true;
+        $("#marquee-box").prepend("<div style='color: green'>You defeated " + opponentPickId + "!</div>");
+        // setTimeout(() => {
+        //     $("#marquee-box").prepend("<div style='color: black'>Pick your next opponent</div>");
+        // }, 400);
         printToScreen();
         nextFighter();
-        // endGame("Player won the fight!");
+        // endGame("You won! You're the strongest fighter in the universe!");
     }
 
     printToScreen();
     console.log("Player Energy Attack: " + playerEnergyAttack);
 
+    if (opponent.health > 0) {
+        setTimeout ( () => {
+            let opponentCounterAttack = attackDamage(opponent.counter);
+            player.health -= opponentCounterAttack;
+            $("#marquee-box").prepend("<div style='color: red'>" + opponentPickId + " countered with " + opponentCounterAttack + " damage </div>");
+            printToScreen();
+            console.log("Opponent Counter Attack: " + opponentCounterAttack);
+        },200);
+    }
+
     setTimeout( () => {
-        let opponentCounterAttack = attackDamage(opponent.counter);
-        player.health -= opponentCounterAttack;
-        
         if (gameOver(player.health)) {
             player.health = 0;
+            meleeButton.disabled = true;
+            energyButton.disabled = true;
+            $("#marquee-box").prepend("<div style='color: red'>" + opponentPickId + " defeated you!</div>");
+            // setTimeout(() => {
+            //     $("#marquee-box").prepend("<div style='color: black'>Click restart to play again</div>");
+            // }, 400);
             printToScreen();
-            nextFighter();
+            return;
             // endGame("Opponent won the fight!");
         }
         energyButton.disabled = false;
-        printToScreen();
-        console.log("Opponent Counter Attack: " + opponentCounterAttack);
+        
+        if (gameOver(opponent.health)) {
+            meleeButton.disabled = true;
+            energyButton.disabled = true;
+        }
     }, 2000)
 }
 
@@ -171,29 +256,47 @@ const gameOver = (health) => {
 // resets buttons and prints message
 
 const endGame = (message) => {
-    document.getElementById("marquee").textContent = message;
-    document.getElementById("melee-button").disabled = true;
-    document.getElementById("energy-button").disabled = true;
-    // document.getElementById("restart-button").hidden = false;
+    if (deathRow.length === 4) {
+        $("#marquee-box").prepend("<div style='color: black'>" + message + "</div>");
+        document.getElementById("melee-button").disabled = true;
+        document.getElementById("energy-button").disabled = true;
+    } else {
+        nextFighter();
+    }
 }
 
 const nextFighter = () => {
-    opponent.health = 0;
-    opponent.counter = 0;
-    opponent.power.melee = 0;
-    opponent.power.energy = 0;
-    oHealth.textContent = "";
-    oCounter.textContent = "";
-    oMelee.textContent = "";
-    oEnergy.textContent = "";
-    opponentPick = false;
-    activeOpponentName.textContent = "";
-    $(".char").disabled = false;
-    $("#death-row").append($(".active-enemy"));
-    $(".active-enemy").addClass("dead");
-    $(".dead").removeClass("active-enemy");
-    $(".dead").off("click");
-    charSwap();
+    if (deathRow.length === 3) {
+        $("#marquee-box").prepend("<div style='color: black'>You won! You're the strongest fighter in the universe!</div>");
+        meleeButton.disabled = true;
+        energyButton.disabled = true;
+        $("#b-melee").off("click");
+        $("#b-energy").off("click");
+    } else {
+        setTimeout(() => {
+            $("#marquee-box").prepend("<div style='color: black'>Pick your next opponent</div>");
+        }, 200);
+        opponent.health = 0;
+        opponent.counter = 0;
+        opponent.power.melee = 0;
+        opponent.power.energy = 0;
+        oHealth.textContent = "";
+        oCounter.textContent = "";
+        oMelee.textContent = "";
+        oEnergy.textContent = "";
+        opponentPick = false;
+        activeOpponentName.textContent = "";
+        meleeButton.disabled = true;
+        energyButton.disabled = true;
+        $(".char").disabled = false;
+        $("#death-row").append($(".active-enemy"));
+        deathRow.push(opponentPickId);
+        $(".active-enemy").addClass("dead");
+        $(".dead").removeClass("active-enemy");
+        $(".dead").removeClass("char");
+        $(".dead").off("click");
+        charSwap();
+    }
 }
 
 // resets the game 
@@ -209,7 +312,7 @@ const restartGame = () => {
     // meleeButton.hidden = false;
     // energyButton.disabled = false;
     // energyButton.hidden = false;
-    // document.getElementById("marquee").textContent = "";
+    // document.getElementById("marquee-box").textContent = "";
     // document.getElementById("restart-button").hidden = true;
 }
 
@@ -398,7 +501,7 @@ printToScreen();
         if (opponentPickId == "Beerus") {
             oHealth.textContent = beerus.health;
             oCounter.textContent = beerus.counter;
-            onmouseleave.textContent = beerus.power.melee;
+            oMelee.textContent = beerus.power.melee;
             oEnergy.textContent = beerus.power.energy;
         }
     }
@@ -408,13 +511,18 @@ printToScreen();
             $(this).removeClass("char").addClass("active-player");
             $(this).next(".label").empty();
             charSwap();
-            $("#player-active").append($(this));
+            $("#player-active").append($(this));       
+            $(".active-player").off("click");
             playerPick = true;
             playerPickId = $(this).attr("id");
             activePlayerName.textContent = playerPickId;
             charMatch();
             printStats();
             printToScreen();
+            $("#marquee-box").prepend("<div style='color: green'>You picked " + playerPickId + "</div>");
+            setTimeout(() => {
+                $("#marquee-box").prepend("<div style='color: black'>Now select your opponent</div>");
+            }, 400);
             // pick your fighter
         }
         else if (playerPick === true && opponentPick === false) {
@@ -428,6 +536,14 @@ printToScreen();
             charMatch();
             printStats();
             printToScreen();
+            $("#marquee-box").prepend("<div style='color: red'>Your opponent is " + opponentPickId + "</div>");
+            setTimeout(() => {
+                $("#marquee-box").prepend("<div style='color: black'>Ready to attack!</div>");
+            }, 400);
+            if (playerPick === true && opponentPick === true) {
+                meleeButton.disabled = false;
+                energyButton.disabled = false;
+            }
             // pick opponent fighter
         }
         else {
@@ -436,26 +552,24 @@ printToScreen();
         }
     })
 
-    
-   
+
 
 // additional features
 
     // on image hover, show fighter stats using modal
-    // change attack buttons
-    // disable attack buttons between gameOver and nextFighter
     // format text throughout
-    // program game ticker
     // styling and background pics
-    // game over and game won conditions
-    // fully reset on restart
+    // double player health at nextFighter instead of reset
 
 // bonus features
 
     // defeat enemy, go super saiyan
-    // location.reload(true); to reload page
     // turn charMatch, charSwap, and printStats into for loops
     // miss a turn after using energy attack (double counter)
     // miss an attack if random attack power is less than 20 (double counter)
+    // fully reset on restart instead of reload
 
+// issues
 
+    // images without char class are still choosable 
+    // can click-off and display message coexist?

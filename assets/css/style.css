@@ -40,20 +40,43 @@ h4 {
 }
 
 #action-buttons {
-    background-color: navy;
+    background-color: black;
     text-align: center;
 }
 
 #melee-button {
-
+    background: none;
+    border: none;
+    color: white;
 }
 
 #energy-button {
-
+    background: none;
+    border: none;
+    color: white;
+    
 }
 
 #restart-button {
+    background: none;
+    border: none;
+    color: white;
+}
 
+.toggle {
+    -webkit-transition: 50ms ease all;
+    -moz-transition: 50ms ease all;
+    -o-transition: 50ms ease all;
+    transition: 50ms ease all;
+    -webkit-transform: rotate(-5deg);
+  }
+
+#melee-button:disabled {
+    color: rgb(94, 94, 94);
+}
+
+#energy-button:disabled {
+    color: rgb(94, 94, 94);
 }
 
 #opponent-fighter {
@@ -129,7 +152,7 @@ h4 {
     max-height: 200px;
     min-height: 200px;
     overflow-y: auto;
-    
+    text-align: center;
 }
 
 /* #marquee-box::-webkit-scrollbar {
