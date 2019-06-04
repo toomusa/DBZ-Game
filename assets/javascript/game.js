@@ -110,7 +110,7 @@ $("#b-melee").on("click", function() {
     }
 });
 
-$(".dead").on("click", function() {
+$(document).on("click", ".dead", function() {
     $("#marquee-box").prepend("<div style='color: black'>Fool he already dead</div>");
 });
 // executes melee attack, deals damange, receives counter damage
@@ -119,9 +119,13 @@ $(".dead").on("click", function() {
 const meleeAttack = () => {
 
     let playerMeleeAttack = attackDamage(player.power.melee);
-    opponent.health -= playerMeleeAttack;
-    $("#marquee-box").prepend("<div style='color: green'>You dealt " + playerMeleeAttack + " damage </div>");
-    
+    if (playerMeleeAttack <= 20) {
+        $("#marquee-box").prepend("<div style='color: green'>You missed! No damage dealt</div>");
+    } else {
+        opponent.health -= playerMeleeAttack;
+        $("#marquee-box").prepend("<div style='color: green'>You dealt " + playerMeleeAttack + " damage </div>");
+    }
+
     $("#b-melee").addClass("toggle");
     setTimeout(function() {
         $("#b-melee").removeClass("toggle");
@@ -148,8 +152,13 @@ const meleeAttack = () => {
         let opponentCounterAttack = attackDamage(opponent.counter);
         if (opponent.health > 0) {
             let opponentCounterAttack = attackDamage(opponent.counter);
-            player.health -= opponentCounterAttack;
-            $("#marquee-box").prepend("<div style='color: red'>" + opponentPickId + " countered with " + opponentCounterAttack + " damage </div>");
+            if (opponentCounterAttack <= 20) {
+                $("#marquee-box").prepend("<div style='color: red'>" + opponentPickId + " missed! No damage dealt</div>");
+            } else {
+                player.health -= opponentCounterAttack;
+                $("#marquee-box").prepend("<div style='color: red'>" + opponentPickId + " countered with " + opponentCounterAttack + " damage </div>");
+            }
+            
             printToScreen();
         }
 
@@ -182,9 +191,13 @@ const meleeAttack = () => {
 const energyAttack = () => {
 
     let playerEnergyAttack = attackDamage(player.power.energy);
-    opponent.health -= playerEnergyAttack;
-    $("#marquee-box").prepend("<div style='color: green'>You dealt " + playerEnergyAttack + " damage </div>");
-
+    if (playerEnergyAttack <= 20) {
+        $("#marquee-box").prepend("<div style='color: green'>You missed! No damage dealt</div>");
+    } else {
+        opponent.health -= playerEnergyAttack;
+        $("#marquee-box").prepend("<div style='color: green'>You dealt " + playerEnergyAttack + " damage </div>");
+    }
+    
     $("#b-energy").addClass("toggle");
     setTimeout(function() {
         $("#b-energy").removeClass("toggle");
@@ -211,8 +224,12 @@ const energyAttack = () => {
     if (opponent.health > 0) {
         setTimeout ( () => {
             let opponentCounterAttack = attackDamage(opponent.counter);
-            player.health -= opponentCounterAttack;
-            $("#marquee-box").prepend("<div style='color: red'>" + opponentPickId + " countered with " + opponentCounterAttack + " damage </div>");
+            if (opponentCounterAttack <= 20) {
+                $("#marquee-box").prepend("<div style='color: red'>" + opponentPickId + " missed! No damage dealt</div>");
+            } else {
+                player.health -= opponentCounterAttack;
+                $("#marquee-box").prepend("<div style='color: red'>" + opponentPickId + " countered with " + opponentCounterAttack + " damage </div>");
+            }
             printToScreen();
             console.log("Opponent Counter Attack: " + opponentCounterAttack);
         },200);
@@ -223,7 +240,7 @@ const energyAttack = () => {
             player.health = 0;
             meleeButton.disabled = true;
             energyButton.disabled = true;
-            $("#marquee-box").prepend("<div style='color: red'>" + opponentPickId + " defeated you!</div>");
+            $("#marquee-box").prepend("<div style='color: red'>" + opponentPickId + " defeated you! You lose</div>");
             // setTimeout(() => {
             //     $("#marquee-box").prepend("<div style='color: black'>Click restart to play again</div>");
             // }, 400);
@@ -267,6 +284,13 @@ const endGame = (message) => {
 
 const nextFighter = () => {
     if (deathRow.length === 3) {
+        $("#active-opponent-name").html("<br>");
+        $("#death-row").append($(".active-enemy"));
+        deathRow.push(opponentPickId);
+        $(".active-enemy").addClass("dead");
+        $(".dead").removeClass("active-enemy");
+        $(".dead").removeClass("char");
+        charSwap();
         $("#marquee-box").prepend("<div style='color: black'>You won! You're the strongest fighter in the universe!</div>");
         meleeButton.disabled = true;
         energyButton.disabled = true;
@@ -285,7 +309,7 @@ const nextFighter = () => {
         oMelee.textContent = "";
         oEnergy.textContent = "";
         opponentPick = false;
-        activeOpponentName.textContent = "";
+        activeOpponentName.textContent = "Next Fighter";
         meleeButton.disabled = true;
         energyButton.disabled = true;
         $(".char").disabled = false;
@@ -294,7 +318,7 @@ const nextFighter = () => {
         $(".active-enemy").addClass("dead");
         $(".dead").removeClass("active-enemy");
         $(".dead").removeClass("char");
-        $(".dead").off("click");
+        // $(".dead").off("click");
         charSwap();
     }
 }
@@ -378,7 +402,7 @@ printToScreen();
         };
     }
 
-    function charMatch() {
+    function playerMatch() {
         if (playerPickId == "Goku") {
             player.health = goku.health;
             pCounter.textContent = goku.counter;
@@ -409,6 +433,8 @@ printToScreen();
             player.power.melee = beerus.power.melee;
             player.power.energy = beerus.power.energy;
         }
+    }
+    function opponentMatch() {
         if (opponentPickId == "Goku") {
             opponent.health = goku.health;
             opponent.counter = goku.counter;
@@ -506,7 +532,7 @@ printToScreen();
         }
     }
 
-    $(".char").on("click", function charSelect() {
+    $(document).on("click", ".char", function charSelect() {
         if (playerPick === false && opponentPick === false) {
             $(this).removeClass("char").addClass("active-player");
             $(this).next(".label").empty();
@@ -516,7 +542,7 @@ printToScreen();
             playerPick = true;
             playerPickId = $(this).attr("id");
             activePlayerName.textContent = playerPickId;
-            charMatch();
+            playerMatch();
             printStats();
             printToScreen();
             $("#marquee-box").prepend("<div style='color: green'>You picked " + playerPickId + "</div>");
@@ -533,7 +559,13 @@ printToScreen();
             opponentPick = true;
             opponentPickId = $(this).attr("id");
             activeOpponentName.textContent = opponentPickId;
-            charMatch();
+            opponentMatch();
+            
+            // if (deathRow.length > 0) {
+            //     player.health = player.health     
+            // }
+
+
             printStats();
             printToScreen();
             $("#marquee-box").prepend("<div style='color: red'>Your opponent is " + opponentPickId + "</div>");

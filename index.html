@@ -12,14 +12,15 @@
 </head>
 <body>
 
-
+        
 
 <div class="container">
+        <div class="bg"></div>  
     <!-- header row -->
     <div class="row">
         <div class="col-sm-12" id="heading">
-            <h1>Tournament of Power</h1>
-            <h4>Who is the most powerful warrior in the universe? Let's find out!</h4>
+            <h1>Tournament of Power</span></h1>
+            <h4>Who is the most powerful warrior in the universe?</h4>
         </div>
     </div>
     <!-- character select row -->
@@ -31,23 +32,23 @@
                 <!-- spacer column -->
                 </div>
                 <div class="col-sm-2" id="select-box">
-                    <img src="./assets/images/beerus1.png" class="char" id="Beerus" height="210px">
+                    <img src="./assets/images/beerus1.png" class="char" id="Beerus" height="230px">
                     <p class="label">Beerus</p>
                 </div>
                 <div class="col-sm-2" id="select-box">
-                    <img src="./assets/images/goku1.png" class="char" id="Goku" height="230px">
+                    <img src="./assets/images/goku1.png" class="char" id="Goku" height="250px">
                     <p class="label">Goku</p>
                 </div>
                 <div class="col-sm-2" id="select-box">
-                    <img src="./assets/images/frieza1.png" class="char" id="Frieza" height="210px"> 
+                    <img src="./assets/images/frieza1.png" class="char" id="Frieza" height="230px"> 
                     <p class="label">Frieza</p>
                 </div>
                 <div class="col-sm-2" id="select-box">
-                    <img src="./assets/images/vegeta1.png" class="char" id="Vegeta" height="220px">
+                    <img src="./assets/images/vegeta1.png" class="char" id="Vegeta" height="240px">
                     <p class="label">Vegeta</p>
                 </div>
                 <div class="col-sm-2" id="select-box">
-                    <img src="./assets/images/jiren1.png" class="char" id="Jiren" height="200px">
+                    <img src="./assets/images/jiren1.png" class="char" id="Jiren" height="220px">
                     <p class="label">Jiren</p>
                 </div>
                 <div class="col-sm-1" id="select-box">
@@ -61,11 +62,11 @@
         <!-- player fighter area -->
         <div class="col-sm-4" id="player-fighter">
             <div class="card" style="width: 100%;" id="fighter-card">
-                <div id="active-player-name"> </div>
+                <div id="active-player-name"><br> </div>
                     <div id="player-active"> </div>
                 <!-- <img class="card-img-top char player-active"> -->
                 <div class="card-body">
-                    <h6>Fighter Stats</h6>
+                    <h5 style="-webkit-text-stroke: 1px green; text-decoration: underline">Player Stats</h5>
                     <p class="card-text" id="player-stats"> 
                         Health: <span id="p-health"> </span><br>
                         Melee Attack: <span id="p-melee"> </span><br>
@@ -80,11 +81,11 @@
             <div class="row">
                 <div class="col-sm-12 text-light" id="fighter-health">
                     <!-- fighter health area -->
-                    <br>
-                    <h5>Your Health: <span id="player-health"> </span></h5> 
-                    <br>
-                    <h5>Opponent's Health: <span id="opponent-health"> </span></h5>
-                    <br>
+                    <!-- <br> -->
+                    <h6 style="-webkit-text-stroke: 1px green;">Your Health: <span id="player-health"> </span></h6> 
+                    <!-- <br> -->
+                    <h6 style="-webkit-text-stroke: 1px red;">Opponent's Health: <span id="opponent-health"> </span></h6>
+                    <!-- <br> -->
                 </div>
             </div>
             <div class="row">
@@ -99,11 +100,11 @@
                 <div class="col-sm-12" id="action-buttons">
                     <!-- buttons -->
                     <!-- <img src="./assets/images/melee.png" id="b-melee" width="100px;"> -->
-                    <button id="melee-button" onclick="meleeAttack()"><img src="./assets/images/melee.png" id="b-melee" width="100px;"> Melee Attack</button>
+                    <button id="melee-button" onclick="meleeAttack()"><img src="./assets/images/melee.png" id="b-melee" width="90px;"><div>Melee Attack</div></button>
                     <!-- <br><br> -->
-                    <button id="energy-button" onclick="energyAttack()"><img src="./assets/images/energy.png" id="b-energy" width="120px;"> Energy Attack</button>
+                    <button id="energy-button" onclick="energyAttack()"><img src="./assets/images/energy.png" id="b-energy" width="110px;"><div>Energy Attack</div></button>
                     <!-- <br><br> -->
-                    <button id="restart-button" onclick="restartGame()"><img src="./assets/images/sensu.png" id="b-restart" width="80px;"> Restart Game</button>
+                    <button id="restart-button" onclick="restartGame()"><img src="./assets/images/sensu.png" id="b-restart" width="70px;"><div>Restart Game</div></button>
                     <!-- <br><br> -->
                 </div>
             </div>
@@ -111,10 +112,10 @@
         <!-- opponent fighter area -->
         <div class="col-sm-4" id="opponent-fighter">
             <div class="card" style="width: 100%;" id="fighter-card">
-                <div id="active-opponent-name"> </div>
+                <div id="active-opponent-name"><br> </div>
                 <div id="opponent-active"> </div>
                 <div class="card-body">
-                    <h6>Fighter Stats</h6>
+                    <h5 style="-webkit-text-stroke: 1px red; text-decoration: underline">Opponent Stats</h5>
                     <p class="card-text" id="opponent-stats"> 
                         Health: <span id="o-health"> </span><br>
                         Melee Attack: <span id="o-melee"> </span><br>
@@ -128,7 +129,7 @@
     <!-- death row -->
     <div class="row">
         <div class="col-sm-12" id="death-row">
-            <h3>Graveyard</h3>
+            <h2>Graveyard</h2>
         </div>
     </div>
 </div>
